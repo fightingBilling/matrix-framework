@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- production的时候,debug应该设置为false或删除debug属性 -->
+<configuration debug="false">
+
+    <property resource="matrix-log.properties" />
+
+    <property name="root.folder" value="${log.home}/root" />
+
+    <property name="trace.folder" value="${log.home}/trace" />
+
+    <property name="job.folder" value="${log.home}/job" />
+
+    <property name="jms.folder" value="${log.home}/jms" />
+
+    <property name="debug.folder" value="${log.home}/debug" />
+
+    <property name="monitor.controller.folder" value="${log.home}/monitor/controller" />
+
+    <property name="monitor.sql.folder" value="${log.home}/monitor/sql" />
+
+    <property name="monitor.hql.folder" value="${log.home}/monitor/hql" />
+
+    <property name="monitor.cql.folder" value="${log.home}/monitor/cql" />
+
+    <appender name="DEV" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${log.root.level}</level>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="PRODUCT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${log.root.level}</level>
+        </filter>
+        <file>${root.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志分包策略以finaNamePattern中的最小时间单位为分,例如此处设置为每HH小时 -->
+            <fileNamePattern>${root.folder}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!-- 指定字符集以解决日志中的乱码问题. -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="traceappender" class="org.matrix.framework.core.log.TraceAppender">
+        <layout class="org.matrix.framework.core.log.FilterMessagePatternLayout">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+        <logFolder>${trace.folder}</logFolder>
+    </appender>
+
+    <appender name="jobappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${job.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${job.folder}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="sqlappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${monitor.sql.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${folder.monitor.sql}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="cqlappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${monitor.cql.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${monitor.cql.folder}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="hqlappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${monitor.hql.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${monitor.hql.folder}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="monitorappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${monitor.controller.folder}/${project.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${monitor.controller.folder}/${project.name}.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="jmsappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${log.JMSLOGGER.level}</level>
+        </filter>
+        <file>${jms.folder}/${project.name}-jms.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${jms.folder}/${project.name}-jms.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <!-- 实测失败 -->
+            <pattern>%d [%thread] %-5level %logger{36} - %-10.10X{activemq.broker} %-20.20X{activemq.connector} %-20.20X{activemq.destination} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="debugappender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <file>${debug.folder}/${project.name}-debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${debug.folder}/${project.name}-debug.%d{yyyy-MM-dd_HH}.log.gz
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder
+            class="org.matrix.framework.core.log.FilterMessagePatternLayoutEncoder">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="SQLLOGGER" level="${log.SQLLOGGER.level}">
+        <appender-ref ref="sqlappender" />
+    </logger>
+
+    <logger name="CQLLOGGER" level="${log.CQLLOGGER.level}">
+        <appender-ref ref="cqlappender" />
+    </logger>
+
+    <logger name="HQLLOGGER" level="${log.HQLLOGGER.level}">
+        <appender-ref ref="hqlappender" />
+    </logger>
+
+    <!--additivity属性设为false表示不继承root的配置,默认情况下,该属性为true -->
+    <logger name="MONITORLOGGER" level="${log.MONITORLOGGER.level}"
+        additivity="false">
+        <appender-ref ref="monitorappender" />
+    </logger>
+
+    <logger name="JOBLOGGER" level="${log.JOBLOGGER.level}">
+        <appender-ref ref="jobappender" />
+    </logger>
+
+    <logger name="JMSLOGGER" level="${log.JMSLOGGER.level}">
+        <appender-ref ref="jmsappender" />
+    </logger>
+
+    <logger name="DEBUGLOGGER" level="${log.DEBUGLOGGER.level}">
+        <appender-ref ref="debugappender" />
+    </logger>
+
+    <root level="${log.root.level}">
+        <appender-ref ref="${project.status}" />
+        <!-- <appender-ref ref="traceappender" /> -->
+    </root>
+
+</configuration>
+
