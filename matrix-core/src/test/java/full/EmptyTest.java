@@ -851,7 +851,7 @@ public class EmptyTest {
 
     @Test
     public void test60() throws InterruptedException {
-        for (;;) {
+        for (; ; ) {
             InputStream in = null;
             try {
                 Properties properties = System.getProperties();
@@ -884,7 +884,7 @@ public class EmptyTest {
 
     @Test
     public void test62() {
-        for (;;) {
+        for (; ; ) {
             try {
                 InputStream in = new FileInputStream("asdasdasdasda");
             } catch (Exception e) {
@@ -1262,8 +1262,9 @@ public class EmptyTest {
     }
 
     @Test
-    public void test83(){
-        System.out.println("http://112.124.50.175:9995/api/v1/blacklist/18011314686?business_type=7&sign=aa9b49241c4c1915cb3ac5e84201b75d&data="+URLEncoder.encode("{\"operator\":\"sdy_admin\",\"agent\": \"bms\"}"));
+    @SuppressWarnings("all")
+    public void test83() {
+        System.out.println("http://112.124.50.175:9995/api/v1/blacklist/18011314686?business_type=7&sign=aa9b49241c4c1915cb3ac5e84201b75d&data=" + URLEncoder.encode("{\"operator\":\"sdy_admin\",\"agent\": \"bms\"}"));
     }
 
 

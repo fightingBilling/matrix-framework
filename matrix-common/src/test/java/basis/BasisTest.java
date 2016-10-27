@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by pktczwd on 2016/10/18.
@@ -24,6 +25,11 @@ public class BasisTest {
         SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm");
         System.out.println(format.format(originalFormat.parse(target.replace("+08:00", "+0800"))));
+    }
+
+    @Test
+    public void test2() {
+        System.out.println(new Date(1477388276000L));
     }
 
 }
