@@ -53,6 +53,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
+ * 跟matrix本身并没有什么关联.
  * Created by pankai on 2016/10/26.
  */
 public class EmptyTest {
@@ -1267,5 +1268,35 @@ public class EmptyTest {
         System.out.println("http://112.124.50.175:9995/api/v1/blacklist/18011314686?business_type=7&sign=aa9b49241c4c1915cb3ac5e84201b75d&data=" + URLEncoder.encode("{\"operator\":\"sdy_admin\",\"agent\": \"bms\"}"));
     }
 
+    @Test
+    public void test84() {
+        Filter filter1 = new Filter();
+        filter1.setFilterOrder(0);
+        Filter filter2 = new Filter();
+        filter2.setFilterOrder(1);
+        List<Filter> list = Lists.newArrayList(filter1, filter2);
+        Collections.sort(list);
+        for (Filter filter : list) {
+            System.out.println(filter.getFilterOrder());
+        }
+    }
+
+    private class Filter implements Comparable<Filter> {
+
+        private int filterOrder;
+
+        @Override
+        public int compareTo(Filter filter) {
+            return this.filterOrder - filter.getFilterOrder();
+        }
+
+        public int getFilterOrder() {
+            return filterOrder;
+        }
+
+        public void setFilterOrder(int filterOrder) {
+            this.filterOrder = filterOrder;
+        }
+    }
 
 }
