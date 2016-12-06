@@ -10,6 +10,7 @@
 	<modules>
 		<module>matrix-ws-pom</module>
 		<module>matrix-pom</module>
+		<module>matrix-common</module>
 		<module>matrix-ws-core</module>
 		<module>matrix-core</module>
 		<module>matrix-redis</module>
