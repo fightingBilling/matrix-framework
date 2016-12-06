@@ -5,7 +5,7 @@
         <groupId>org.matrix.framework</groupId>  
         <artifactId>matrix-ws-pom</artifactId>
         <version>2.0.0-RELEASE</version>  
-		<relativePath></relativePath>
+		<relativePath>../matrix-ws-pom/pom.xml</relativePath>
     </parent> 
     <artifactId>matrix-pom</artifactId>
     <version>2.0.0-RELEASE</version>
